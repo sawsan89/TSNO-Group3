@@ -11,15 +11,15 @@ class Profile extends Component {
     this.state = {
       body: ""
     }
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleServiceAdd = this.handleServiceAdd.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleServiceAdd = this.handleServiceAdd.bind(this)
   };
 
   //change the value of body to new service
   handleServiceAdd(event) {
     this.setState({ body: event.target.value });
 
-  };
+  }
 
   //send data to database
   handleSubmit(event) {
@@ -28,19 +28,15 @@ class Profile extends Component {
       body: this.state.body
     }
 
-    axios({
-      url: "",
-      method: "POST",
-      data: payload
-    })
-      .then(() => {
-        console.log("Data is sent to Server")
+    //sending data to server
+    axios.post('https://localhost:5000/profile', payload)
+      .then(function (response) {
+        console.log(response);
       })
-      .cathch(() => {
-        console.log("Internal Server Error")
-      })
-  };
-
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
 
   render() {
